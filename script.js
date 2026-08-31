@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     const pixels = particleContext.getImageData(0, 0, particleCanvas.width, particleCanvas.height).data;
-    const stride = Math.max(3, Math.round(scale * 2));
+    const stride = Math.max(2, Math.round(scale * 1.5));
     for (let y = 0; y < particleCanvas.height; y += stride) {
       for (let x = 0; x < particleCanvas.width; x += stride) {
         const alpha = pixels[(y * particleCanvas.width + x) * 4 + 3];
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
             originY: y / scale,
             velocityX: (Math.random() - 0.5) * 4.8,
             velocityY: (Math.random() - 0.5) * 0.35,
-            size: Math.random() * 2.4 + 1.1,
+            size: Math.random() * 0.8 + 0.45,
             opacity: 0.95,
           });
         }
