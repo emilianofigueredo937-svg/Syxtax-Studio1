@@ -122,11 +122,13 @@ textarea {
   z-index: 200;
   display: grid;
   place-items: center;
-  background: rgba(233, 236, 239, 0.92);
+  background: #858d96;
   backdrop-filter: blur(3px);
   opacity: 1;
   visibility: visible;
   transition: opacity 0.9s ease, visibility 0.9s ease;
+  animation: introFallback 3.4s ease forwards;
+  animation-delay: 0.8s;
 }
 
 .intro-overlay.hidden {
@@ -944,6 +946,18 @@ section {
   100% {
     transform: translate3d(-18px, -58px, 0) scale(0.5);
     opacity: 0;
+  }
+}
+
+@keyframes introFallback {
+  0%, 72% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 }
 
