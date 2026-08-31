@@ -28,8 +28,8 @@ body {
   margin: 0;
   font-family: Inter, "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at top, rgba(160, 168, 177, 0.14), transparent 26%),
-    linear-gradient(180deg, #aeb6bf 0%, #89939e 100%);
+    radial-gradient(circle at top, rgba(130, 141, 153, 0.12), transparent 26%),
+    linear-gradient(180deg, #68727d 0%, #3f4852 100%);
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;

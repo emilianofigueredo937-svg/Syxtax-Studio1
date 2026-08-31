@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     const pixels = particleContext.getImageData(0, 0, particleCanvas.width, particleCanvas.height).data;
-    const stride = Math.max(2, Math.round(scale * 1.5));
+    const stride = Math.max(3, Math.round(scale * 2));
     for (let y = 0; y < particleCanvas.height; y += stride) {
       for (let x = 0; x < particleCanvas.width; x += stride) {
         const alpha = pixels[(y * particleCanvas.width + x) * 4 + 3];
@@ -69,6 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
       }
+    }
+
+    if (particles.length > 160) {
+      const selectionStep = Math.ceil(particles.length / 160);
+      particles.splice(0, particles.length, ...particles.filter((particle, index) => index % selectionStep === 0));
     }
 
     const drawLetterParticles = (dispersing) => {
