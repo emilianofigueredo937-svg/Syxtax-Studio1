@@ -95,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     drawLetterParticles(false);
     setTimeout(() => {
       introLogo.classList.add("particle-dissolve");
+      introCanvas.classList.add("particle-canvas-visible");
       const dissolveStart = performance.now();
       const animateDissolve = (now) => {
         drawLetterParticles(true);
