@@ -71,11 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    if (particles.length > 160) {
-      const selectionStep = Math.ceil(particles.length / 160);
-      particles.splice(0, particles.length, ...particles.filter((particle, index) => index % selectionStep === 0));
-    }
-
     const drawLetterParticles = (dispersing) => {
       context.clearRect(0, 0, introCanvas.width, introCanvas.height);
       context.save();

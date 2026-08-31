@@ -27,9 +27,7 @@ html {
 body {
   margin: 0;
   font-family: Inter, "Segoe UI", sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(130, 141, 153, 0.12), transparent 26%),
-    linear-gradient(180deg, #68727d 0%, #3f4852 100%);
+  background: #4a535d;
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
@@ -39,8 +37,7 @@ body::before,
 body::after {
   content: "";
   position: fixed;
-  border-radius: 50%;
-  filter: blur(80px);
+  display: none;
   pointer-events: none;
   z-index: 0;
 }
