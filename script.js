@@ -62,13 +62,22 @@ document.addEventListener("DOMContentLoaded", () => {
             y: y / scale,
             originX: x / scale,
             originY: y / scale,
-            velocityX: (Math.random() - 0.5) * 1.4,
-            velocityY: (Math.random() - 0.8) * 1.8,
-            size: Math.random() * 1.8 + 0.7,
+            velocityX: (Math.random() - 0.5) * 4.8,
+            velocityY: (Math.random() - 0.5) * 0.35,
+            size: Math.random() * 2.4 + 1.1,
             opacity: 0.95,
           });
         }
       }
+    }
+
+    if (particles.length > 120) {
+      const selectedParticles = [];
+      const selectionStep = particles.length / 120;
+      for (let index = 0; index < 120; index += 1) {
+        selectedParticles.push(particles[Math.floor(index * selectionStep)]);
+      }
+      particles.splice(0, particles.length, ...selectedParticles);
     }
 
     const drawLetterParticles = (dispersing) => {
@@ -79,7 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (dispersing) {
           particle.x += particle.velocityX;
           particle.y += particle.velocityY;
-          particle.velocityY += 0.006;
+          particle.velocityX *= 0.994;
+          particle.velocityY += 0.001;
           particle.opacity -= 0.003;
         }
 
