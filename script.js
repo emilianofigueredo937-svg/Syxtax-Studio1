@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     const pixels = particleContext.getImageData(0, 0, particleCanvas.width, particleCanvas.height).data;
-    const stride = Math.max(4, Math.round(scale * 3));
+    const stride = Math.max(2, Math.round(scale * 1.5));
     for (let y = 0; y < particleCanvas.height; y += stride) {
       for (let x = 0; x < particleCanvas.width; x += stride) {
         const alpha = pixels[(y * particleCanvas.width + x) * 4 + 3];
