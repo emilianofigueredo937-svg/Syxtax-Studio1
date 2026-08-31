@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     drawLetterParticles(false);
-    const startIntroDissolve = () => {
+    setTimeout(() => {
       introLogo.classList.add("particle-dissolve");
       introCanvas.classList.add("particle-canvas-visible");
       const dissolveStart = performance.now();
@@ -114,10 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       };
       requestAnimationFrame(animateDissolve);
-    };
-
-    introLogo.dataset.startDissolve = "ready";
-    introLogo.startDissolve = startIntroDissolve;
+    }, 1250);
   }
 
   const introOverlay = document.querySelector(".intro-overlay");
@@ -125,17 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
     introOverlay.style.opacity = "1";
     introOverlay.style.visibility = "visible";
 
-    const enterButton = introOverlay.querySelector(".intro-enter");
-    enterButton.addEventListener("click", () => {
-      if (introLogo && introLogo.startDissolve) {
-        introLogo.startDissolve();
-      }
-      enterButton.disabled = true;
-      setTimeout(() => {
-        introOverlay.classList.add("hidden");
-        introOverlay.setAttribute("aria-hidden", "true");
-      }, 1900);
-    });
+    setTimeout(() => {
+      introOverlay.classList.add("hidden");
+    }, 4100);
   }
 
   document.body.classList.add("loaded");
