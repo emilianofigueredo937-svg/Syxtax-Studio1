@@ -62,9 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
             y: y / scale,
             originX: x / scale,
             originY: y / scale,
-            velocityX: (Math.random() - 0.5) * 4.8,
-            velocityY: (Math.random() - 0.5) * 0.35,
-            size: Math.random() * 0.8 + 0.45,
+            velocityX: (Math.random() - 0.5) * 7.2,
+            velocityY: Math.random() * 4.2 - 3.1,
+            size: Math.random() * 0.95 + 0.55,
             opacity: 0.95,
           });
         }
