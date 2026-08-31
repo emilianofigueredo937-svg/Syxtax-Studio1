@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     yearElement.textContent = new Date().getFullYear();
   }
 
-  const revealItems = document.querySelectorAll(".service-card, .price-card, .cta-panel, .contact-card");
+  const revealItems = document.querySelectorAll(".reveal, .service-card, .price-card, .cta-panel, .contact-card, .feature-card, .benefit-card, .step-card, .quote-card");
 
   const revealObserver = new IntersectionObserver(
     (entries) => {

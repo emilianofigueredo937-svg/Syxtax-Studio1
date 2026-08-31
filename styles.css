@@ -469,6 +469,95 @@ textarea {
   color: var(--muted);
 }
 
+.premium-benefits,
+.process,
+.testimonials {
+  padding-top: 0.5rem;
+}
+
+.benefits-grid,
+.process-grid,
+.testimonial-grid {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.benefits-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.benefit-card,
+.step-card,
+.quote-card {
+  position: relative;
+  padding: 1.5rem 1.2rem;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(18, 25, 27, 0.96), rgba(10, 14, 17, 0.92));
+  border: 1px solid var(--line);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.benefit-card:hover,
+.step-card:hover,
+.quote-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(104,255,176,0.4);
+}
+
+.pill,
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 32px;
+  padding: 0 0.6rem;
+  border-radius: 999px;
+  background: rgba(104,255,176,0.08);
+  border: 1px solid rgba(104,255,176,0.2);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.benefit-card h3,
+.step-card h3 {
+  margin: 1rem 0 0.6rem;
+  font-size: 1.25rem;
+}
+
+.benefit-card p,
+.step-card p,
+.quote-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.process-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.step-card {
+  min-height: 200px;
+}
+
+.testimonial-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.quote-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  margin-top: 1rem;
+  color: var(--text);
+}
+
+.quote-meta span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 section {
   padding: 2rem 0 5rem;
 }
