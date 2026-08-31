@@ -124,8 +124,6 @@ textarea {
   opacity: 1;
   visibility: visible;
   transition: opacity 0.9s ease, visibility 0.9s ease;
-  animation: introFallback 3.4s ease forwards;
-  animation-delay: 0.8s;
 }
 
 .intro-overlay.hidden {
@@ -165,7 +163,66 @@ textarea {
   color: rgba(255, 255, 255, 0.96);
   text-align: center;
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.35);
-  animation: introText 3.2s ease both;
+}
+
+.owner-card {
+  position: absolute;
+  top: calc(50% + 5.2rem);
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 0.1rem;
+  min-width: 150px;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid rgba(255,255,255,0.42);
+  border-radius: 16px;
+  background: rgba(54, 62, 70, 0.78);
+  color: #fff;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+  transform: translateX(-50%);
+}
+
+.owner-avatar {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.2rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.owner-label,
+.owner-handle {
+  color: #cbd5dc;
+  font-size: 0.7rem;
+}
+
+.owner-label {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.owner-card strong {
+  font-size: 1.05rem;
+}
+
+.intro-enter {
+  position: absolute;
+  top: calc(50% + 13.5rem);
+  left: 50%;
+  padding: 0.8rem 1.25rem;
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: 999px;
+  background: #fff;
+  color: #303942;
+  cursor: pointer;
+  font-weight: 800;
+  transform: translateX(-50%);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.16);
+}
+
+.intro-enter span {
+  margin-left: 0.35rem;
+  font-size: 1.1rem;
 }
 
 .intro-logo.particle-dissolve {
@@ -1137,18 +1194,6 @@ section {
   }
 }
 
-@keyframes introFallback {
-  0%, 78% {
-    opacity: 1;
-    visibility: visible;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-}
-
 @keyframes floatGlow {
   from {
     transform: translate3d(0, 0, 0) scale(1);
@@ -1217,5 +1262,13 @@ section {
 
   .hero {
     padding-top: 4rem;
+  }
+
+  .owner-card {
+    top: calc(50% + 4.2rem);
+  }
+
+  .intro-enter {
+    top: calc(50% + 13rem);
   }
 }
