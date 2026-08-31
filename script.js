@@ -4,6 +4,39 @@ document.addEventListener("DOMContentLoaded", () => {
     yearElement.textContent = new Date().getFullYear();
   }
 
+  const particlesContainer = document.querySelector(".page-particles");
+  if (particlesContainer) {
+    const particleCount = 70;
+
+    for (let i = 0; i < particleCount; i += 1) {
+      const particle = document.createElement("span");
+      particle.className = "particle";
+
+      const size = Math.random() * 5 + 2;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${10 + Math.random() * 14}s`;
+      particle.style.animationDelay = `${Math.random() * 4}s`;
+      particle.style.opacity = (Math.random() * 0.7 + 0.3).toString();
+
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  const introOverlay = document.querySelector(".intro-overlay");
+  if (introOverlay) {
+    introOverlay.style.opacity = "1";
+    introOverlay.style.visibility = "visible";
+
+    setTimeout(() => {
+      introOverlay.classList.add("hidden");
+    }, 2600);
+  }
+
+  document.body.classList.add("loaded");
+
   const revealItems = document.querySelectorAll(".reveal, .service-card, .price-card, .cta-panel, .contact-card, .feature-card, .benefit-card, .step-card, .quote-card");
 
   const revealObserver = new IntersectionObserver(
@@ -45,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Estilos de aparición para elementos animados
 const style = document.createElement("style");
 style.textContent = `
   .reveal {
