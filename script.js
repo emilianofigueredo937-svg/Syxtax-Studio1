@@ -6,20 +6,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const particlesContainer = document.querySelector(".page-particles");
   if (particlesContainer) {
-    const particleCount = 1000;
+    const particleCount = 180;
 
     for (let i = 0; i < particleCount; i += 1) {
       const particle = document.createElement("span");
       particle.className = "particle";
 
-      const size = Math.random() * 4 + 1.5;
+      const size = Math.random() * 2.8 + 1.4;
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
       particle.style.left = `${Math.random() * 100}%`;
       particle.style.top = `${Math.random() * 100}%`;
-      particle.style.animationDuration = `${12 + Math.random() * 18}s`;
-      particle.style.animationDelay = `${Math.random() * 5}s`;
-      particle.style.opacity = (Math.random() * 0.8 + 0.2).toString();
+      particle.style.animationDuration = `${16 + Math.random() * 18}s`;
+      particle.style.animationDelay = `${Math.random() * 6}s`;
+      particle.style.opacity = (Math.random() * 0.5 + 0.12).toString();
 
       particlesContainer.appendChild(particle);
     }
