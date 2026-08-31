@@ -374,5 +374,36 @@
         © <span id="year"></span> Syntax Studio — Desarrollo de software avanzado.
       </div>
     </footer>
+
+    <aside class="assistant" aria-label="Asistente de Syntax Studio">
+      <button class="assistant-toggle" type="button" aria-expanded="false" aria-controls="assistant-panel">
+        <span class="assistant-orb" aria-hidden="true">✦</span>
+        <span>Asistente</span>
+      </button>
+      <div class="assistant-panel" id="assistant-panel" aria-hidden="true">
+        <div class="assistant-head">
+          <div>
+            <strong>Syntax AI</strong>
+            <span>Respuesta instantánea</span>
+          </div>
+          <button class="assistant-close" type="button" aria-label="Cerrar asistente">×</button>
+        </div>
+        <div class="assistant-messages" aria-live="polite">
+          <div class="assistant-message assistant-message-bot">
+            Hola, soy el asistente de Syntax Studio. Pregúntame por el dueño, servicios o cómo comprar.
+          </div>
+        </div>
+        <div class="assistant-quick-actions">
+          <button type="button" data-question="¿Quién es el dueño?">Dueño</button>
+          <button type="button" data-question="¿Cómo puedo comprar?">Comprar</button>
+          <button type="button" data-question="¿Qué servicios ofrecen?">Servicios</button>
+        </div>
+        <form class="assistant-form">
+          <label class="sr-only" for="assistant-input">Escribe tu pregunta</label>
+          <input id="assistant-input" type="text" placeholder="Escribe tu pregunta..." autocomplete="off" />
+          <button type="submit" aria-label="Enviar pregunta">↑</button>
+        </form>
+      </div>
+    </aside>
   </body>
 </html>

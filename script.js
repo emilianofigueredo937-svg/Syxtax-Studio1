@@ -168,6 +168,73 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 1800);
     });
   }
+
+  const assistant = document.querySelector(".assistant");
+  if (assistant) {
+    const toggle = assistant.querySelector(".assistant-toggle");
+    const close = assistant.querySelector(".assistant-close");
+    const panel = assistant.querySelector(".assistant-panel");
+    const assistantForm = assistant.querySelector(".assistant-form");
+    const input = assistant.querySelector(".assistant-form input");
+    const messages = assistant.querySelector(".assistant-messages");
+    const discordUrl = "https://discord.gg/SrnEHgnnfY";
+
+    const answerQuestion = (question) => {
+      const normalizedQuestion = question.toLowerCase();
+      if (normalizedQuestion.includes("dueño") || normalizedQuestion.includes("creador") || normalizedQuestion.includes("owner")) {
+        return "El dueño de Syntax Studio es Emiliano Figueredo.";
+      }
+      if (normalizedQuestion.includes("compr") || normalizedQuestion.includes("contrat") || normalizedQuestion.includes("precio")) {
+        return `Para comprar o pedir un presupuesto, entra a nuestro Discord: ${discordUrl}`;
+      }
+      if (normalizedQuestion.includes("servicio") || normalizedQuestion.includes("hacen") || normalizedQuestion.includes("ofrecen")) {
+        return "Ofrecemos desarrollo web, scripts para FiveM, ciberseguridad, automatización y soluciones a medida.";
+      }
+      if (normalizedQuestion.includes("discord") || normalizedQuestion.includes("contact")) {
+        return `Puedes contactarnos directamente aquí: ${discordUrl}`;
+      }
+      return "Puedo ayudarte con información del dueño, servicios, precios y compras. Prueba una de esas preguntas.";
+    };
+
+    const ask = (question) => {
+      const cleanQuestion = question.trim();
+      if (!cleanQuestion) return;
+
+      const userMessage = document.createElement("div");
+      userMessage.className = "assistant-message assistant-message-user";
+      userMessage.textContent = cleanQuestion;
+      messages.appendChild(userMessage);
+
+      const botMessage = document.createElement("div");
+      botMessage.className = "assistant-message assistant-message-bot";
+      botMessage.textContent = answerQuestion(cleanQuestion);
+      messages.appendChild(botMessage);
+      messages.scrollTop = messages.scrollHeight;
+      input.value = "";
+    };
+
+    toggle.addEventListener("click", () => {
+      const isOpen = panel.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", isOpen.toString());
+      panel.setAttribute("aria-hidden", (!isOpen).toString());
+      if (isOpen) input.focus();
+    });
+
+    close.addEventListener("click", () => {
+      panel.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      panel.setAttribute("aria-hidden", "true");
+    });
+
+    assistantForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      ask(input.value);
+    });
+
+    assistant.querySelectorAll("[data-question]").forEach((button) => {
+      button.addEventListener("click", () => ask(button.dataset.question));
+    });
+  }
 });
 
 const style = document.createElement("style");
