@@ -6,20 +6,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const particlesContainer = document.querySelector(".page-particles");
   if (particlesContainer) {
-    const particleCount = 70;
+    const particleCount = 1000;
 
     for (let i = 0; i < particleCount; i += 1) {
       const particle = document.createElement("span");
       particle.className = "particle";
 
-      const size = Math.random() * 5 + 2;
+      const size = Math.random() * 4 + 1.5;
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
       particle.style.left = `${Math.random() * 100}%`;
       particle.style.top = `${Math.random() * 100}%`;
-      particle.style.animationDuration = `${10 + Math.random() * 14}s`;
-      particle.style.animationDelay = `${Math.random() * 4}s`;
-      particle.style.opacity = (Math.random() * 0.7 + 0.3).toString();
+      particle.style.animationDuration = `${12 + Math.random() * 18}s`;
+      particle.style.animationDelay = `${Math.random() * 5}s`;
+      particle.style.opacity = (Math.random() * 0.8 + 0.2).toString();
 
       particlesContainer.appendChild(particle);
     }
@@ -179,21 +179,83 @@ document.addEventListener("DOMContentLoaded", () => {
     const messages = assistant.querySelector(".assistant-messages");
     const discordUrl = "https://discord.gg/SrnEHgnnfY";
 
+    const STORE_INFO = {
+      owner: "Kaly",
+      brand: "Syntax Studio",
+      services: [
+        "desarrollo web",
+        "scripts para FiveM",
+        "automatización",
+        "ciberseguridad",
+        "soluciones a medida"
+      ],
+      plans: {
+        starter: "$19/mes",
+        pro: "$49/mes",
+        premium: "$89/mes"
+      }
+    };
+
+    const normalizeText = (value) => value
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9\s]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const detectIntent = (question) => {
+      const q = normalizeText(question);
+
+      if (/(emiliano|figueredo|quien|due[nñ]o|dueno|propietario|owner|creador|kaly|kali)/.test(q)) return "owner";
+      if (/(comprar|compras|precio|presupuesto|costo|pagar|orden|solicitar|contratar|plan|budget|cotizar|factura)/.test(q)) return "buy";
+      if (/(servicio|servicios|haces|ofreces|que hacen|que venden|store|productos|trabajos|web|fivem|automatizacion|scripts|seguridad)/.test(q)) return "services";
+      if (/(discord|link|enlace|contacto|contactar|mensaje|hablar|ayuda|soporte|whatsapp)/.test(q)) return "contact";
+      if (/(cuanto|precio|cuesta|costar|monta)/.test(q)) return "pricing";
+      if (/(hola|buenas|buenos|hey|hi|todo bien|como estas|como va|que tal|como andas|como estas)/.test(q)) return "greeting";
+      if (/(gracias|thank you|muchas gracias|te lo agradezco)/.test(q)) return "thanks";
+      if (/(adios|chau|bye|hasta luego|nos vemos)/.test(q)) return "bye";
+      if (/(quien eres|eres una ia|que eres|bot|asistente|ayuda)/.test(q)) return "general";
+
+      return "general";
+    };
+
     const answerQuestion = (question) => {
-      const normalizedQuestion = question.toLowerCase();
-      if (normalizedQuestion.includes("dueño") || normalizedQuestion.includes("creador") || normalizedQuestion.includes("owner")) {
-        return "El dueño de Syntax Studio es Emiliano Figueredo.";
+      const intent = detectIntent(question);
+      const q = normalizeText(question);
+
+      switch (intent) {
+        case "owner":
+          return `El dueño de ${STORE_INFO.brand} es ${STORE_INFO.owner}.`;
+        case "buy":
+          return `Para comprar, pedir un proyecto o consultar presupuesto, puedes entrar a nuestro Discord: ${discordUrl}`;
+        case "services":
+          return `Ofrecemos ${STORE_INFO.services.join(", ")} y soluciones personalizadas para tu proyecto.`;
+        case "contact":
+          return `Puedes hablar con nosotros directamente en Discord: ${discordUrl}`;
+        case "pricing":
+          return `Nuestros planes son: Starter ${STORE_INFO.plans.starter}, Pro ${STORE_INFO.plans.pro} y Premium ${STORE_INFO.plans.premium}.`;
+        case "greeting":
+          if (/(todo bien|como estas|como va|que tal|como andas)/.test(q)) {
+            return "¡Hola! Sí, todo bien. ¿En qué puedo ayudarte con Syntax Studio?";
+          }
+          return `Hola, ¿en qué puedo ayudarte con ${STORE_INFO.brand}?`;
+        case "thanks":
+          return "¡Con gusto! Si quieres, también puedo ayudarte a pedir un proyecto o entrar al Discord.";
+        case "bye":
+          return "¡Hasta luego! Si necesitas ayuda con Syntax Studio, aquí estoy.";
+        default:
+          return "¡Claro! Soy el asistente de Syntax Studio y puedo ayudarte con servicios, precios, compras, contacto y preguntas generales sobre la store. También puedes pedirme un presupuesto o decirme si quieres entrar al Discord.";
       }
-      if (normalizedQuestion.includes("compr") || normalizedQuestion.includes("contrat") || normalizedQuestion.includes("precio")) {
-        return `Para comprar o pedir un presupuesto, entra a nuestro Discord: ${discordUrl}`;
-      }
-      if (normalizedQuestion.includes("servicio") || normalizedQuestion.includes("hacen") || normalizedQuestion.includes("ofrecen")) {
-        return "Ofrecemos desarrollo web, scripts para FiveM, ciberseguridad, automatización y soluciones a medida.";
-      }
-      if (normalizedQuestion.includes("discord") || normalizedQuestion.includes("contact")) {
-        return `Puedes contactarnos directamente aquí: ${discordUrl}`;
-      }
-      return "Puedo ayudarte con información del dueño, servicios, precios y compras. Prueba una de esas preguntas.";
+    };
+
+    const addAnimatedMessage = (element) => {
+      element.style.opacity = "0";
+      element.style.transform = "translateY(14px) scale(0.96)";
+      requestAnimationFrame(() => {
+        element.style.opacity = "1";
+        element.style.transform = "translateY(0) scale(1)";
+      });
     };
 
     const ask = (question) => {
@@ -203,14 +265,27 @@ document.addEventListener("DOMContentLoaded", () => {
       const userMessage = document.createElement("div");
       userMessage.className = "assistant-message assistant-message-user";
       userMessage.textContent = cleanQuestion;
+      addAnimatedMessage(userMessage);
       messages.appendChild(userMessage);
 
-      const botMessage = document.createElement("div");
-      botMessage.className = "assistant-message assistant-message-bot";
-      botMessage.textContent = answerQuestion(cleanQuestion);
-      messages.appendChild(botMessage);
+      const thinkingMessage = document.createElement("div");
+      thinkingMessage.className = "assistant-message assistant-message-bot assistant-message-thinking";
+      thinkingMessage.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+      addAnimatedMessage(thinkingMessage);
+      messages.appendChild(thinkingMessage);
       messages.scrollTop = messages.scrollHeight;
       input.value = "";
+
+      setTimeout(() => {
+        thinkingMessage.remove();
+
+        const botMessage = document.createElement("div");
+        botMessage.className = "assistant-message assistant-message-bot";
+        botMessage.textContent = answerQuestion(cleanQuestion);
+        addAnimatedMessage(botMessage);
+        messages.appendChild(botMessage);
+        messages.scrollTop = messages.scrollHeight;
+      }, 3000);
     };
 
     toggle.addEventListener("click", () => {

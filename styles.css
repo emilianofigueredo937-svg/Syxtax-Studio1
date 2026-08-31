@@ -908,39 +908,48 @@ section {
 .assistant-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.7rem 0.95rem;
-  border: 1px solid rgba(255,255,255,0.3);
+  gap: 0.6rem;
+  padding: 0.8rem 1.1rem;
+  border: 1px solid rgba(255,255,255,0.32);
   border-radius: 999px;
-  background: #252d35;
-  color: #fff;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.24);
+  background: linear-gradient(135deg, rgba(17, 24, 30, 0.96), rgba(31, 43, 52, 0.96));
+  color: #f8fbff;
+  box-shadow: 0 16px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(148,215,176,0.18);
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.assistant-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 32px rgba(0,0,0,0.34), 0 0 0 1px rgba(148,215,176,0.22);
 }
 
 .assistant-orb {
   display: grid;
   place-items: center;
-  width: 1.55rem;
-  height: 1.55rem;
+  width: 1.7rem;
+  height: 1.7rem;
   border-radius: 50%;
-  background: var(--primary);
-  color: #1d2a25;
+  background: linear-gradient(135deg, #a7f3c0, #7ad8a7);
+  color: #14281f;
+  box-shadow: 0 0 22px rgba(122, 216, 167, 0.7);
 }
 
 .assistant-panel {
   position: absolute;
   right: 0;
-  bottom: 3.8rem;
+  bottom: 4.2rem;
   display: none;
-  width: min(360px, calc(100vw - 2rem));
+  width: min(380px, calc(100vw - 2rem));
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.32);
-  border-radius: 20px;
-  background: #252d35;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(15,19,24,0.98), rgba(28,36,45,0.97));
   color: #f7fafc;
-  box-shadow: 0 22px 50px rgba(0,0,0,0.32);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px);
 }
 
 .assistant-panel.is-open {
@@ -952,8 +961,9 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 1rem 1.05rem;
   border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(90deg, rgba(148,215,176,0.09), rgba(255,255,255,0.02));
 }
 
 .assistant-head div {
@@ -961,42 +971,182 @@ section {
   gap: 0.15rem;
 }
 
+.assistant-head strong {
+  font-size: 0.96rem;
+  letter-spacing: 0.04em;
+}
+
 .assistant-head span {
   color: #aebac5;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
 }
 
 .assistant-close {
   border: 0;
-  background: transparent;
+  background: rgba(255,255,255,0.04);
   color: #dce5eb;
-  font-size: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 1.4rem;
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.assistant-close:hover {
+  background: rgba(255,255,255,0.08);
+  transform: rotate(90deg);
 }
 
 .assistant-messages {
   display: grid;
-  gap: 0.6rem;
-  max-height: 250px;
+  gap: 0.7rem;
+  max-height: 280px;
   padding: 1rem;
   overflow-y: auto;
+  background: rgba(255,255,255,0.02);
 }
 
 .assistant-message {
   width: fit-content;
   max-width: 88%;
-  padding: 0.7rem 0.8rem;
-  border-radius: 12px;
-  background: #37424d;
+  padding: 0.8rem 0.95rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
   color: #edf2f5;
-  font-size: 0.86rem;
-  line-height: 1.45;
+  font-size: 0.87rem;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+  transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
+  animation: assistantMessageIn 0.35s ease forwards;
+  box-shadow: 0 12px 24px rgba(10, 15, 28, 0.22);
 }
 
 .assistant-message-user {
   justify-self: end;
-  background: var(--primary);
-  color: #15231c;
+  background: linear-gradient(135deg, #d9fbe5, #bfead1);
+  color: #112119;
+  border-bottom-right-radius: 6px;
+  box-shadow: 0 14px 26px rgba(125, 211, 166, 0.25);
+}
+
+.assistant-message-bot {
+  justify-self: start;
+  background: linear-gradient(180deg, rgba(27, 34, 41, 0.96), rgba(21, 27, 32, 0.96));
+  border: 1px solid rgba(148, 215, 176, 0.18);
+  border-bottom-left-radius: 6px;
+}
+
+.assistant-message-thinking {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0.7rem 0.8rem;
+}
+
+.typing-dot {
+  width: 0.46rem;
+  height: 0.46rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  animation: typingPulse 1.2s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.assistant-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.8rem 1rem 0.95rem;
+  background: rgba(255,255,255,0.02);
+}
+
+.assistant-quick-actions button {
+  padding: 0.5rem 0.72rem;
+  border: 1px solid rgba(148,215,176,0.4);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(20, 27, 31, 0.8), rgba(29, 39, 46, 0.8));
+  color: #e8fbf0;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.assistant-quick-actions button:hover {
+  border-color: rgba(148,215,176,0.7);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(148,215,176,0.12);
+}
+
+.assistant-form {
+  display: flex;
+  gap: 0.55rem;
+  padding: 0.9rem 1rem 1rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  background: rgba(12,17,22,0.78);
+}
+
+.assistant-form input {
+  min-width: 0;
+  flex: 1;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  outline: none;
+  background: rgba(255,255,255,0.04);
+  color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.assistant-form input:focus {
+  border-color: rgba(148,215,176,0.8);
+  box-shadow: 0 0 0 3px rgba(148,215,176,0.12);
+}
+
+.assistant-form button {
+  width: 2.8rem;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #9ef1b7, #79d7a0);
+  color: #14281f;
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 900;
+  box-shadow: 0 10px 20px rgba(121, 215, 160, 0.28);
+}
+
+@keyframes assistantMessageIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes typingPulse {
+  0%, 80%, 100% {
+    opacity: 0.35;
+    transform: translateY(0) scale(0.9);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1);
+  }
+}
+
+@keyframes assistantIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .assistant-quick-actions {
