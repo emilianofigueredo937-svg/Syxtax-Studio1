@@ -138,20 +138,36 @@ textarea {
 }
 
 .intro-logo-wrap {
+  position: relative;
   display: grid;
   place-items: center;
   width: min(90vw, 900px);
   height: min(60vh, 420px);
 }
 
+.intro-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 .intro-logo {
+  position: relative;
+  z-index: 1;
   font-size: clamp(3rem, 9vw, 8rem);
   font-weight: 900;
   letter-spacing: -0.09em;
   color: rgba(255, 255, 255, 0.96);
   text-align: center;
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.35);
-  animation: introText 2.5s ease both;
+  animation: introText 3.2s ease both;
+}
+
+.intro-logo.particle-dissolve {
+  opacity: 0;
+  transition: opacity 0.45s ease;
 }
 
 .topbar {
@@ -919,7 +935,12 @@ section {
     transform: scale(1) translateY(0);
     filter: blur(0);
   }
-  65% {
+  38% {
+    opacity: 1;
+    transform: scale(1.02) translateY(0);
+    filter: blur(0);
+  }
+  55% {
     opacity: 1;
     transform: scale(1.02) translateY(0);
     filter: blur(0);
@@ -950,7 +971,7 @@ section {
 }
 
 @keyframes introFallback {
-  0%, 72% {
+  0%, 78% {
     opacity: 1;
     visibility: visible;
   }
